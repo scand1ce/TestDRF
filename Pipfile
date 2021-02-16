@@ -1,0 +1,13 @@
+[packages]
+django = "*"
+djangorestframework = "*"
+install = "*"
+django-extensions = "*"
+pillow = "*"
+psycopg2 = "*"
+coreapi = "*"
+pyyaml = "*"
+django-rest-swagger = "*"
+litecli = "*"
+ipython = "*"
+django-rest-framework-tricks = "*"
