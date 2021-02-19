@@ -3,7 +3,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from mainbox.models import Box, Item, Discr
-from mainbox.serializer import BoxSerializer, ItemSerializer # , CharacteristicsSerializer
+from mainbox.serializers import BoxSerializer, ItemSerializer, CharacteristicsSerializer  # , CharacteristicsSerializer
 
 
 @api_view(['GET'])
@@ -20,29 +20,26 @@ def apiOverview(request):
     return Response(api_urls)
 
 
-class BoxView(generics.ListCreateAPIView):
-    queryset = Box.objects.all()
-    queryset = Item.objects.all()
-    serializer_class = BoxSerializer, ItemSerializer
-
-
-class BoxDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Box.objects.all()
-    serializer_class = BoxSerializer
-
-
-
-
-# class DiscrViewSet(viewsets.ModelViewSet):
-#     queryset = Discr.objects.all()
-#     serializer_class = CharacteristicsSerializer
-#
-#
-# class ItemViewSet(viewsets.ModelViewSet):
-#     queryset = Item.objects.all()
-#     serializer_class = ItemSerializer
-#
-#
-# class BoxViewSet(viewsets.ModelViewSet):
+# class BoxView(generics.ListCreateAPIView):
 #     queryset = Box.objects.all()
 #     serializer_class = BoxSerializer
+#
+#
+# class BoxDetail(generics.RetrieveUpdateDestroyAPIView):
+#     queryset = Box.objects.all()
+#     serializer_class = BoxSerializer
+
+
+class DiscrViewSet(viewsets.ModelViewSet):
+    queryset = Discr.objects.all()
+    serializer_class = CharacteristicsSerializer
+
+
+class ItemViewSet(viewsets.ModelViewSet):
+    queryset = Item.objects.all()
+    serializer_class = ItemSerializer
+
+
+class BoxViewSet(viewsets.ModelViewSet):
+    queryset = Box.objects.all()
+    serializer_class = BoxSerializer
