@@ -1,5 +1,4 @@
 .idea
-db.sqlite3
-mainbox/migrations
-OOP.py
+code/DRFTask/mainbox/migrations
+/env
 **/__pycache__

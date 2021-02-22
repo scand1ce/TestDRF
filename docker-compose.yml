@@ -10,8 +10,35 @@ services:
     ports:
       - 5432:5432
 
-  adminer:
-    image: adminer
+
+  django:
     restart: always
+    container_name: DRFTask_django
+    volumes:
+      - ./code:/code
+      - ./sock:/sock
+    build:
+      context: .
+      dockerfile: dockerfiles/docker_django.conf
+    depends_on:
+      - db
+    #command: uwsgi --ini /etc/uwsgi.ini
+    command: bash -c "python /code/DRFTask/manage.py makemigrations && python /code/DRFTask/manage.py migrate && python /code/DRFTask/manage.py runserver"
     ports:
-      - 8080:8080
+      - "8000:8000"
+
+  nginx:
+    restart: always
+    container_name: DRFTask_nginx
+    volumes:
+      - ./code:/code
+      - ./sock:/sock
+    build:
+      context: .
+      dockerfile: dockerfiles/docker_nginx.conf
+    depends_on:
+      - django
+    ports:
+      - "8080:8080"
+
+
