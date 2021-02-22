@@ -1,5 +1,5 @@
 from django.contrib import admin
-from mainbox.models import Box, Item, Discr
+from .models import Box, Item, Discr
 
 admin.site.register(Box)
 admin.site.register(Item)

@@ -1,9 +1,9 @@
-from rest_framework import viewsets, generics
+from rest_framework import viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from mainbox.models import Box, Item, Discr
-from mainbox.serializers import BoxSerializer, ItemSerializer, CharacteristicsSerializer  # , CharacteristicsSerializer
+from .models import Box, Item, Discr
+from .serializers import BoxSerializer, ItemSerializer, CharacteristicsSerializer
 
 
 @api_view(['GET'])
