@@ -1,14 +1,19 @@
 version: '3.1'
 
 services:
-
-  db:
-    image: postgres
+  postgres:
     restart: always
+    container_name: DRFTask_postgres
+    expose:
+      - 5432
+    build:
+      context: .
+      dockerfile: dockerfiles/docker_postgres.conf
+    volumes:
+      - ./dbdata:/var/lib/postgresql/data
     environment:
-      POSTGRES_PASSWORD: example
-    ports:
-      - 5432:5432
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
 
 
   django:
@@ -21,9 +26,9 @@ services:
       context: .
       dockerfile: dockerfiles/docker_django.conf
     depends_on:
-      - db
-    #command: uwsgi --ini /etc/uwsgi.ini
-    command: bash -c "python /code/DRFTask/manage.py makemigrations && python /code/DRFTask/manage.py migrate && python /code/DRFTask/manage.py runserver"
+      - postgres
+    #command: uwsgi --ini /config/uwsgi/uwsgi.ini
+    command: bash -c "python /code/DRFTask/manage.py makemigrations && python /code/DRFTask/manage.py migrate && python /code/DRFTask/manage.py runserver 0.0.0.0:8000"
     ports:
       - "8000:8000"
 
@@ -40,5 +45,3 @@ services:
       - django
     ports:
       - "8080:8080"
-
-
